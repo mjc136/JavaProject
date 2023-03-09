@@ -8,6 +8,8 @@ public class GUIHandler extends JFrame{
     
     LoginGUI loginGUI;
     static JPanel panel;
+    public static GUIHandler handler;
+    public static int user;
 
     public GUIHandler(){
 
@@ -15,8 +17,6 @@ public class GUIHandler extends JFrame{
         panel = loginGUI;
 
         // setting frame
-
-        setSize(500, 500);
         add(panel, BorderLayout.CENTER);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Purchases");
@@ -25,7 +25,6 @@ public class GUIHandler extends JFrame{
 
     }
 
-    public static GUIHandler handler;
 
     public static void replacePanel(Container container, JPanel currentPanel, JPanel newPanel) {
         container.remove(currentPanel); // remove the current panel from the container

@@ -1,6 +1,9 @@
 package GUI;
 
 import javax.swing.*;
+
+import Customer.DeleteCustomer;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
@@ -22,12 +25,21 @@ public class DisplayCustomersGUI extends JPanel{
     private JLabel email;
     private JLabel phoneNum;
     private JLabel dob;
+    private JLabel idLabel;
+    private JLabel firstnameLabel;
+    private JLabel lastnameLabel;
+    private JLabel addressLabel;
+    private JLabel emailLabel;
+    private JLabel phoneNumLabel;
+    private JLabel dobLabel;
     
     private JComboBox<String> customerList = new JComboBox<>();
     private final String DATABASE_URL = "jdbc:mysql://localhost/purchases";
     private Connection connection = null;
     private PreparedStatement pstat= null;
     private ResultSet resultSet = null;
+
+    private JButton back;
      
     public DisplayCustomersGUI(){
          
@@ -36,6 +48,47 @@ public class DisplayCustomersGUI extends JPanel{
         setLayout(new GridBagLayout()); 
         c.insets = new Insets(5, 5, 5, 5); // set margin
         setBackground(Color.cyan);
+
+        // back button
+
+        back = new JButton("Back");
+        c.gridx = 0;
+        c.gridy = 0;
+        add(back, c);
+
+        back.addActionListener(new ActionListener(){ 
+            public void actionPerformed(ActionEvent e) {
+                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new MenuGUI());
+            }
+        });
+
+        idLabel = new JLabel("ID");
+        c.gridy+=2;
+        add(idLabel,c);
+        
+        firstnameLabel = new JLabel("First name");
+        c.gridy++;
+        add(firstnameLabel,c);
+        
+        lastnameLabel = new JLabel("Last name");
+        c.gridy++;
+        add(lastnameLabel,c);
+        
+        addressLabel = new JLabel("Address");
+        c.gridy++;
+        add(addressLabel,c);
+        
+        emailLabel = new JLabel("Email");
+        c.gridy++;
+        add(emailLabel,c);
+        
+        phoneNumLabel = new JLabel("Phone number");
+        c.gridy++;
+        add(phoneNumLabel,c);
+        
+        dobLabel = new JLabel("Date of birth");
+        c.gridy++;
+        add(dobLabel,c);
 
         try{
             // establish connection to database
@@ -56,7 +109,7 @@ public class DisplayCustomersGUI extends JPanel{
         
         c.gridwidth = 5;
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
+        c.gridx++;
         c.gridy = 0;
 
         // buttons
@@ -67,7 +120,6 @@ public class DisplayCustomersGUI extends JPanel{
         addCustomer.addActionListener(new ActionListener(){ // Takes users to add customer screen
             public void actionPerformed(ActionEvent e) {
                 GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new InsertCustomerGUI());
-
             }
         });
         
@@ -77,6 +129,9 @@ public class DisplayCustomersGUI extends JPanel{
         customerList.addActionListener(new ActionListener(){   // when clear is pressed everything is set to null
             public void actionPerformed(ActionEvent e) {
                 try{
+                    remove(addCustomer);
+                    remove(customerList);
+
                     String selectedCustomer = (String) customerList.getSelectedItem();
                     if(selectedCustomer != null){
                         PreparedStatement pstat2 = connection.prepareStatement("SELECT * FROM Customers WHERE first_name = ?");
@@ -94,7 +149,7 @@ public class DisplayCustomersGUI extends JPanel{
                         id = new JLabel(idData);
                         c.gridy++;
                         add(id, c);
-                        if(firstnameData != null){
+                        if(firstnameData != null){  // if null skip 
                             firstname = new JLabel(firstnameData);
                             c.gridy++;
                             add(firstname, c);
@@ -125,33 +180,25 @@ public class DisplayCustomersGUI extends JPanel{
                             add(dob, c);
                         }
 
-                        JButton addCustomer = new JButton("Add");
-                        c.gridy++;
-                        add(addCustomer, c);
-
-                        addCustomer.addActionListener(new ActionListener(){ // Takes users to add customer screen
-                            public void actionPerformed(ActionEvent e) {
-                                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new InsertCustomerGUI());
-                            }
-                        });
-
                         JButton editCustomer = new JButton("Edit");
+                        c.gridy++;
                         c.gridx++;
                         add(editCustomer, c);
 
                         editCustomer.addActionListener(new ActionListener(){   // Takes users to edit customer screen
                             public void actionPerformed(ActionEvent e) {
-                                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new MenuGUI());
+                                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new UpdateCustomerGUI(Integer.parseInt(idData), firstnameData, lastnameData, addressData, emailData, phoneNumData, dobData));
                             }
                         });
 
                         JButton deleteCustomer = new JButton("Delete");
-                        c.gridx++;
+                        c.gridy++;
                         add(deleteCustomer, c);
 
-                        deleteCustomer.addActionListener(new ActionListener(){   // Takes users to delete customer screen
+                        deleteCustomer.addActionListener(new ActionListener(){   // Deletes selected user
                             public void actionPerformed(ActionEvent e) {
-                                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new MenuGUI());
+                                new DeleteCustomer(Integer.parseInt(idData));
+                                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new DisplayCustomersGUI());
                             }
                         });
 

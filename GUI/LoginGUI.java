@@ -10,8 +10,8 @@ public class LoginGUI extends JPanel{
 
     public LoginGUI(){
 
-        GridBagConstraints c = new GridBagConstraints();  
-        setBorder(BorderFactory.createEmptyBorder(200,200,200,200)); // set grid size
+        GridBagConstraints c = new GridBagConstraints(); 
+        setBorder(BorderFactory.createEmptyBorder(30,30,30,30)); // set grid size
         setLayout(new GridBagLayout()); 
         c.insets = new Insets(5, 5, 5, 5); // set margin
         setBackground(Color.cyan);
@@ -53,6 +53,7 @@ public class LoginGUI extends JPanel{
                 String passwordData = password.getText();
                 Verify v = new Verify(userIdData, passwordData);
                 if(v.verifier(userIdData, passwordData)){
+                    UserSession.setUser(userIdData);
                     GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new MenuGUI());
                 }
             }

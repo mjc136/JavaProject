@@ -12,9 +12,7 @@ import java.util.Calendar;
 
 class InsertCustomerGUI extends JPanel{ 
 
-    public void error(){
-
-    }
+    private JButton back;
 
     public InsertCustomerGUI(){
         
@@ -23,12 +21,25 @@ class InsertCustomerGUI extends JPanel{
         setLayout(new GridBagLayout()); 
         c.insets = new Insets(5, 5, 5, 5); // set margin
         setBackground(Color.cyan);
+
+        // back button
+
+        back = new JButton("Back");
+        c.gridx = 0;
+        c.gridy = 0;
+        add(back, c);
+
+        back.addActionListener(new ActionListener(){ 
+            public void actionPerformed(ActionEvent e) {
+                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new DisplayCustomersGUI());
+            }
+        });
         
         // first name
 
         JTextField firstName = new JTextField(10);
-        c.gridx = 1;
-        c.gridy = 0;
+        c.gridx = 2;
+        c.gridy = 1;
         add(firstName, c);
         
         JLabel firstNameLabel = new JLabel("Firstname");
@@ -38,7 +49,7 @@ class InsertCustomerGUI extends JPanel{
         // last name
         
         JTextField lastName = new JTextField(10);
-        c.gridx = 3;
+        c.gridx = 4;
         add(lastName, c);
 
         JLabel lastNameLabel = new JLabel("Lastname");
@@ -48,7 +59,7 @@ class InsertCustomerGUI extends JPanel{
         // address
 
         JTextField address = new JTextField(20);
-        c.gridx = 1;
+        c.gridx = 2;
         c.gridy++;
         add(address, c);
 
@@ -59,7 +70,7 @@ class InsertCustomerGUI extends JPanel{
         // email
 
         JTextField email = new JTextField(15);
-        c.gridx = 1;
+        c.gridx = 2;
         c.gridy++;
         add(email, c);
 
@@ -70,7 +81,7 @@ class InsertCustomerGUI extends JPanel{
         // phone number
         
         JTextField phoneNumber = new JTextField(10);
-        c.gridx =+ 3;
+        c.gridx = 4;
         add(phoneNumber, c);
 
         JLabel phoneNumberLabel = new JLabel("Phone Number");
@@ -86,7 +97,7 @@ class InsertCustomerGUI extends JPanel{
         JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(dateSpinner, "dd/MM/yyyy");
         dateSpinner.setEditor(dateEditor);
 
-        c.gridx = 1;
+        c.gridx = 2;
         c.gridy++;;
         add(dateSpinner, c);
         
@@ -97,7 +108,7 @@ class InsertCustomerGUI extends JPanel{
         // buttons
 
         JButton add = new JButton("add");
-        c.gridx = 1;
+        c.gridx = 2;
         c.gridy++;
         add(add, c);
 
