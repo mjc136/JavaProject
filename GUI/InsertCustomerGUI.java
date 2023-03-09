@@ -1,14 +1,20 @@
 package GUI;
 
 import javax.swing.*;
+
+import Customer.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 import java.util.Calendar;
-import Customer.*;
 
 
 class InsertCustomerGUI extends JPanel{ 
+
+    public void error(){
+
+    }
 
     public InsertCustomerGUI(){
         
@@ -21,61 +27,54 @@ class InsertCustomerGUI extends JPanel{
         // first name
 
         JTextField firstName = new JTextField(10);
-        c.gridx = 5;
-        c.gridy = 5;
+        c.gridx = 1;
+        c.gridy = 0;
         add(firstName, c);
         
         JLabel firstNameLabel = new JLabel("Firstname");
-        c.gridx = 4;
-        c.gridy = 5;
+        c.gridx--;
         add(firstNameLabel, c);
         
         // last name
         
         JTextField lastName = new JTextField(10);
-        c.gridx = 20;
-        c.gridy = 5;
+        c.gridx = 3;
         add(lastName, c);
 
         JLabel lastNameLabel = new JLabel("Lastname");
-        c.gridx = 19;
-        c.gridy = 5;
+        c.gridx--;
         add(lastNameLabel, c);
 
         // address
 
         JTextField address = new JTextField(20);
-        c.gridx = 5;
-        c.gridy = 10;
+        c.gridx = 1;
+        c.gridy++;
         add(address, c);
 
         JLabel addressLabel = new JLabel("Address");
-        c.gridx = 4;
-        c.gridy = 10;
+        c.gridx--;
         add(addressLabel, c);
 
         // email
 
         JTextField email = new JTextField(15);
-        c.gridx = 5;
-        c.gridy = 15;
+        c.gridx = 1;
+        c.gridy++;
         add(email, c);
 
         JLabel emailLabel = new JLabel("Email Address");
-        c.gridx = 4;
-        c.gridy = 15;
+        c.gridx--;
         add(emailLabel, c);
         
         // phone number
         
         JTextField phoneNumber = new JTextField(10);
-        c.gridx = 20;
-        c.gridy = 10;
+        c.gridx =+ 3;
         add(phoneNumber, c);
 
         JLabel phoneNumberLabel = new JLabel("Phone Number");
-        c.gridx = 19;
-        c.gridy = 10;
+        c.gridx--;
         add(phoneNumberLabel, c);
 
         // date of birth
@@ -87,20 +86,19 @@ class InsertCustomerGUI extends JPanel{
         JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(dateSpinner, "dd/MM/yyyy");
         dateSpinner.setEditor(dateEditor);
 
-        c.gridx = 20;
-        c.gridy = 15;
+        c.gridx = 1;
+        c.gridy++;;
         add(dateSpinner, c);
         
         JLabel dobLabel = new JLabel("Date of Birth");
-        c.gridx = 19;
-        c.gridy = 15;
+        c.gridx--;
         add(dobLabel, c);
 
         // buttons
 
         JButton add = new JButton("add");
-        c.gridx = 10;
-        c.gridy = 30;
+        c.gridx = 1;
+        c.gridy++;
         add(add, c);
 
         add.addActionListener(new ActionListener(){ // convert date to string and send to sql file
@@ -117,9 +115,9 @@ class InsertCustomerGUI extends JPanel{
         });
         
         JButton clear = new JButton("clear");
-        c.gridx = 11;
-        c.gridy = 30;
+        c.gridx++;
         add(clear, c);
+
 
         clear.addActionListener(new ActionListener(){   // when clear is pressed everything is set to null
             public void actionPerformed(ActionEvent e) {

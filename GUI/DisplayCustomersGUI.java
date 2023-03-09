@@ -29,7 +29,7 @@ public class DisplayCustomersGUI extends JPanel{
     private PreparedStatement pstat= null;
     private ResultSet resultSet = null;
      
-     public DisplayCustomersGUI(){
+    public DisplayCustomersGUI(){
          
         GridBagConstraints c = new GridBagConstraints();  
         setBorder(BorderFactory.createEmptyBorder(30,30,30,30)); // set grid size
@@ -54,11 +54,24 @@ public class DisplayCustomersGUI extends JPanel{
             sqlException.printStackTrace();
         }
         
-        
         c.gridwidth = 5;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 0;
+
+        // buttons
+
+        JButton addCustomer = new JButton("Add");
+        add(addCustomer, c);
+        
+        addCustomer.addActionListener(new ActionListener(){ // Takes users to add customer screen
+            public void actionPerformed(ActionEvent e) {
+                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new InsertCustomerGUI());
+
+            }
+        });
+        
+        c.gridy++;
         add(customerList, c);
 
         customerList.addActionListener(new ActionListener(){   // when clear is pressed everything is set to null
@@ -69,7 +82,7 @@ public class DisplayCustomersGUI extends JPanel{
                         PreparedStatement pstat2 = connection.prepareStatement("SELECT * FROM Customers WHERE first_name = ?");
                         pstat2.setString(1, selectedCustomer);
                         ResultSet resultSet2 = pstat2.executeQuery();
-                        if (resultSet2.next()) {
+                        if(resultSet2.next()) {
                             idData = resultSet2.getString("customer_id");
                             firstnameData = resultSet2.getString("first_name");
                             lastnameData = resultSet2.getString("last_name");
@@ -81,30 +94,36 @@ public class DisplayCustomersGUI extends JPanel{
                         id = new JLabel(idData);
                         c.gridy++;
                         add(id, c);
-
-                        firstname = new JLabel(firstnameData);
-                        c.gridy++;
-                        add(firstname, c);
-
-                        lastname = new JLabel(lastnameData);
-                        c.gridy++;
-                        add(lastname, c);
-
-                        address = new JLabel(addressData);
-                        c.gridy++;
-                        add(address, c);
-
-                        email = new JLabel(emailData);
-                        c.gridy++;
-                        add(email, c);
-
-                        phoneNum = new JLabel(phoneNumData);
-                        c.gridy++;
-                        add(phoneNum, c);
-
-                        dob = new JLabel(dobData == null ? "" : dobData.toString());
-                        c.gridy++;
-                        add(dob, c);
+                        if(firstnameData != null){
+                            firstname = new JLabel(firstnameData);
+                            c.gridy++;
+                            add(firstname, c);
+                        }
+                        if(lastnameData != null){
+                            lastname = new JLabel(lastnameData);
+                            c.gridy++;
+                            add(lastname, c);
+                        }
+                        if(addressData != null){
+                            address = new JLabel(addressData);
+                            c.gridy++;
+                            add(address, c);
+                        }
+                        if(emailData != null){
+                            email = new JLabel(emailData);
+                            c.gridy++;
+                            add(email, c);
+                        }
+                        if(phoneNumData != null){
+                            phoneNum = new JLabel(phoneNumData);
+                            c.gridy++;
+                            add(phoneNum, c);
+                        }
+                        if(dobData != null){
+                            dob = new JLabel(dobData.toString());
+                            c.gridy++;
+                            add(dob, c);
+                        }
 
                         JButton addCustomer = new JButton("Add");
                         c.gridy++;
@@ -112,7 +131,7 @@ public class DisplayCustomersGUI extends JPanel{
 
                         addCustomer.addActionListener(new ActionListener(){ // Takes users to add customer screen
                             public void actionPerformed(ActionEvent e) {
-                                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new DisplayCustomersGUI());
+                                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new InsertCustomerGUI());
                             }
                         });
 
@@ -160,9 +179,5 @@ public class DisplayCustomersGUI extends JPanel{
                 }
             }
         });
-        
-        
-        
     }
-    
 }

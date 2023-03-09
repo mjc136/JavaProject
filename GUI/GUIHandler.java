@@ -35,9 +35,6 @@ public class GUIHandler extends JFrame{
         panel = newPanel;
     }
     public static void main(String[] args){
-
         handler = new GUIHandler();
-
     }
-
 }
