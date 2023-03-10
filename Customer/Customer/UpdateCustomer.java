@@ -3,7 +3,7 @@ package Customer;
 import java.sql.*;
 
 public class UpdateCustomer {
-       public UpdateCustomer(int id, String firstname, String lastname, String address, String email, String phoneNum, Date dob){
+       public UpdateCustomer(int id, String firstname, String lastname, String address, String email, String phoneNum, java.sql.Date dob){
         
         // database URL
         final String DATABASE_URL = "jdbc:mysql://localhost/purchases";

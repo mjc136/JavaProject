@@ -99,8 +99,9 @@ public class DisplayCustomersGUI extends JPanel{
             resultSet = pstat.executeQuery();
             // process query results
             while (resultSet.next()) {
-                String customerName = resultSet.getString("first_name");
-                customerList.addItem(customerName); // add the customer name to the combobox
+                String customerFirstName = resultSet.getString("first_name");
+                String customerLAstName = resultSet.getString("last_name");
+                customerList.addItem(customerFirstName + " " + customerLAstName); // add the customer name to the combobox
             }
         }
         catch(SQLException sqlException){
@@ -126,7 +127,7 @@ public class DisplayCustomersGUI extends JPanel{
         c.gridy++;
         add(customerList, c);
 
-        customerList.addActionListener(new ActionListener(){   // when clear is pressed everything is set to null
+        customerList.addActionListener(new ActionListener(){   
             public void actionPerformed(ActionEvent e) {
                 try{
                     remove(addCustomer);
@@ -134,8 +135,10 @@ public class DisplayCustomersGUI extends JPanel{
 
                     String selectedCustomer = (String) customerList.getSelectedItem();
                     if(selectedCustomer != null){
-                        PreparedStatement pstat2 = connection.prepareStatement("SELECT * FROM Customers WHERE first_name = ?");
-                        pstat2.setString(1, selectedCustomer);
+                        PreparedStatement pstat2 = connection.prepareStatement("SELECT * FROM Customers WHERE first_name = ? AND last_name=?");
+                        int space = selectedCustomer.indexOf(" ");
+                        pstat2.setString(1, selectedCustomer.substring(0, space));
+                        pstat2.setString(2, selectedCustomer.substring(space+1, selectedCustomer.length()));
                         ResultSet resultSet2 = pstat2.executeQuery();
                         if(resultSet2.next()) {
                             idData = resultSet2.getString("customer_id");

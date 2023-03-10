@@ -112,14 +112,15 @@ class InsertCustomerGUI extends JPanel{
         c.gridy++;
         add(add, c);
 
-        add.addActionListener(new ActionListener(){ // convert date to string and send to sql file
+        add.addActionListener(new ActionListener(){ 
             public void actionPerformed(ActionEvent e) {
                 String firstNameData = firstName.getText();
                 String lastNameData = lastName.getText();
                 String addressData = address.getText();
                 String emailData = email.getText();
                 String phoneNumberData = phoneNumber.getText();
-                Date dobData = dob;
+                Date dobData = new java.sql.Date(dobModel.getDate().getTime());
+                
 
                 new InsertCustomer(firstNameData, lastNameData, addressData, emailData, phoneNumberData, dobData);
             }

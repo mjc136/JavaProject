@@ -6,15 +6,13 @@ import java.awt.*;
 
 public class GUIHandler extends JFrame{
     
-    LoginGUI loginGUI;
     static JPanel panel;
     public static GUIHandler handler;
     public static int user;
 
     public GUIHandler(){
 
-        loginGUI = new LoginGUI();
-        panel = loginGUI;
+        panel = new LoginGUI();
 
         // setting frame
         add(panel, BorderLayout.CENTER);

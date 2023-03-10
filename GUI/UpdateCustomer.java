@@ -22,8 +22,13 @@ class UpdateCustomerGUI extends JPanel{
     private JTextField phoneNumberField;
     private JLabel phoneNumberLabel;
     private Date dobField;
+    private String firstNameData;
+    private String lastNameData;
+    private String addressData;
+    private String emailData;
+    private String phoneNumberData;
 
-    public UpdateCustomerGUI(int id, String firstname, String lastname, String address, String email, String phoneNum, Date dob){
+    public UpdateCustomerGUI(int id, String firstname, String lastname, String address, String email, String phoneNum, java.sql.Date dob){
         
         GridBagConstraints c = new GridBagConstraints();  
         setBorder(BorderFactory.createEmptyBorder(30,30,30,30)); // set grid size
@@ -103,8 +108,7 @@ class UpdateCustomerGUI extends JPanel{
         add(phoneNumberLabel, c);
 
         // date of birth
-        dobField = dob;
-        SpinnerDateModel dobModel = new SpinnerDateModel(dobField, null, null, Calendar.DAY_OF_MONTH);
+        SpinnerDateModel dobModel = new SpinnerDateModel(dob, null, null, Calendar.DAY_OF_MONTH);
         JSpinner dateSpinner = new JSpinner(dobModel);
         
         JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(dateSpinner, "dd/MM/yyyy");
@@ -126,11 +130,12 @@ class UpdateCustomerGUI extends JPanel{
         
         add.addActionListener(new ActionListener(){ // convert date to string and send to sql file
             public void actionPerformed(ActionEvent e) {
-                String firstNameData = firstNameField.getText();
-                String lastNameData = lastNameField.getText();
-                String addressData = addressField.getText();
-                String emailData = emailField.getText();
-                String phoneNumberData = phoneNumberField.getText();
+                firstNameData = firstNameField.getText();
+                lastNameData = lastNameField.getText();
+                addressData = addressField.getText();
+                emailData = emailField.getText();
+                phoneNumberData = phoneNumberField.getText();
+                dobField = new java.sql.Date(dobModel.getDate().getTime());
                 
                 new UpdateCustomer(id, firstNameData, lastNameData, addressData, emailData, phoneNumberData, dobField);
             }
