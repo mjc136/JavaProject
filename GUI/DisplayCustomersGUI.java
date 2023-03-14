@@ -32,7 +32,6 @@ public class DisplayCustomersGUI extends JPanel{
     private JLabel emailLabel;
     private JLabel phoneNumLabel;
     private JLabel dobLabel;
-    
     private JComboBox<String> customerList = new JComboBox<>();
     private final String DATABASE_URL = "jdbc:mysql://localhost/purchases";
     private Connection connection = null;
@@ -100,8 +99,8 @@ public class DisplayCustomersGUI extends JPanel{
             // process query results
             while (resultSet.next()) {
                 String customerFirstName = resultSet.getString("first_name");
-                String customerLAstName = resultSet.getString("last_name");
-                customerList.addItem(customerFirstName + " " + customerLAstName); // add the customer name to the combobox
+                String customerLastName = resultSet.getString("last_name");
+                customerList.addItem(customerFirstName + " " + customerLastName); // add the customer name to the combobox
             }
         }
         catch(SQLException sqlException){

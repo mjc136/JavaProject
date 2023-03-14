@@ -33,7 +33,7 @@ public class MenuGUI extends JPanel{
 
         items.addActionListener(new ActionListener(){   // Takes users to products menu
             public void actionPerformed(ActionEvent e) {
-                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new MenuGUI());
+                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new DisplayItemGUI());
             }
         });
 

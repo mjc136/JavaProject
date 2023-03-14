@@ -11,7 +11,7 @@ public class DeleteOrders{
         Connection connection = null;
         PreparedStatement pstat = null;
         int i=0;
-        int orderID=1;
+        int orderID=3;
         try{
             // establish connection to database
             connection = DriverManager.getConnection(

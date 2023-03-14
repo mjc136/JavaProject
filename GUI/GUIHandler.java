@@ -8,7 +8,7 @@ public class GUIHandler extends JFrame{
     
     static JPanel panel;
     public static GUIHandler handler;
-    public static int user;
+    static int user;
 
     public GUIHandler(){
 

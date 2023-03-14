@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.*;
 import Product.*;
 
-public class InsertItemGUI {
+public class InsertItemGUI extends JPanel{
 
     public InsertItemGUI(){
 

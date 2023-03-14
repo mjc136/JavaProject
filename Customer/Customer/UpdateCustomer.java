@@ -1,6 +1,7 @@
 package Customer;
 
 import java.sql.*;
+import javax.swing.JOptionPane;
 
 public class UpdateCustomer {
        public UpdateCustomer(int id, String firstname, String lastname, String address, String email, String phoneNum, java.sql.Date dob){
@@ -24,9 +25,11 @@ public class UpdateCustomer {
             pstat.setInt(7, id);
             //Update data in the table
             pstat.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Customer updated successfully!");
         }
         catch(SQLException sqlException ) {
-            sqlException.printStackTrace () ;
+            sqlException.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error: " + sqlException.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
         }
         finally {
             try{
