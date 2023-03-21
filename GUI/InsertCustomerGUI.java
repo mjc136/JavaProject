@@ -13,6 +13,25 @@ import java.util.Calendar;
 class InsertCustomerGUI extends JPanel{ 
 
     private JButton back;
+    private JTextField firstName;
+    private JLabel firstNameLabel;
+    private JTextField lastName;
+    private JLabel lastNameLabel;
+    private JTextField address;
+    private JLabel addressLabel;
+    private JTextField email;
+    private JLabel emailLabel;
+    private JTextField phoneNumber;
+    private JLabel phoneNumberLabel;
+    private Date dob;
+    private JLabel dobLabel;
+    private JButton add;
+    private String firstNameData;
+    private String lastNameData;
+    private String addressData;
+    private String emailData;
+    private String phoneNumberData;
+    private Date dobData;
 
     public InsertCustomerGUI(){
         
@@ -37,60 +56,60 @@ class InsertCustomerGUI extends JPanel{
         
         // first name
 
-        JTextField firstName = new JTextField(10);
+        firstName = new JTextField(10);
         c.gridx = 2;
         c.gridy = 1;
         add(firstName, c);
         
-        JLabel firstNameLabel = new JLabel("Firstname");
+        firstNameLabel = new JLabel("Firstname");
         c.gridx--;
         add(firstNameLabel, c);
         
         // last name
         
-        JTextField lastName = new JTextField(10);
+        lastName = new JTextField(10);
         c.gridx = 4;
         add(lastName, c);
 
-        JLabel lastNameLabel = new JLabel("Lastname");
+        lastNameLabel = new JLabel("Lastname");
         c.gridx--;
         add(lastNameLabel, c);
 
         // address
 
-        JTextField address = new JTextField(20);
+        address = new JTextField(20);
         c.gridx = 2;
         c.gridy++;
         add(address, c);
 
-        JLabel addressLabel = new JLabel("Address");
+        addressLabel = new JLabel("Address");
         c.gridx--;
         add(addressLabel, c);
 
         // email
 
-        JTextField email = new JTextField(15);
+        email = new JTextField(15);
         c.gridx = 2;
         c.gridy++;
         add(email, c);
 
-        JLabel emailLabel = new JLabel("Email Address");
+        emailLabel = new JLabel("Email Address");
         c.gridx--;
         add(emailLabel, c);
         
         // phone number
         
-        JTextField phoneNumber = new JTextField(10);
+        phoneNumber = new JTextField(10);
         c.gridx = 4;
         add(phoneNumber, c);
 
-        JLabel phoneNumberLabel = new JLabel("Phone Number");
+        phoneNumberLabel = new JLabel("Phone Number");
         c.gridx--;
         add(phoneNumberLabel, c);
 
         // date of birth
 
-        Date dob = new Date(System.currentTimeMillis());
+        dob = new Date(System.currentTimeMillis());
         SpinnerDateModel dobModel = new SpinnerDateModel(dob, null, null, Calendar.DAY_OF_MONTH);
         JSpinner dateSpinner = new JSpinner(dobModel);
 
@@ -101,25 +120,25 @@ class InsertCustomerGUI extends JPanel{
         c.gridy++;;
         add(dateSpinner, c);
         
-        JLabel dobLabel = new JLabel("Date of Birth");
+        dobLabel = new JLabel("Date of Birth");
         c.gridx--;
         add(dobLabel, c);
 
         // buttons
 
-        JButton add = new JButton("add");
+        add = new JButton("add");
         c.gridx = 2;
         c.gridy++;
         add(add, c);
 
         add.addActionListener(new ActionListener(){ 
             public void actionPerformed(ActionEvent e) {
-                String firstNameData = firstName.getText();
-                String lastNameData = lastName.getText();
-                String addressData = address.getText();
-                String emailData = email.getText();
-                String phoneNumberData = phoneNumber.getText();
-                Date dobData = new java.sql.Date(dobModel.getDate().getTime());
+                firstNameData = firstName.getText();
+                lastNameData = lastName.getText();
+                addressData = address.getText();
+                emailData = email.getText();
+                phoneNumberData = phoneNumber.getText();
+                dobData = new java.sql.Date(dobModel.getDate().getTime());
                 
 
                 new InsertCustomer(firstNameData, lastNameData, addressData, emailData, phoneNumberData, dobData);

@@ -3,7 +3,7 @@ package Orders;
 import java.sql.*;
 
 public class UpdateOrders{
-       public static void main(String[] args) {
+       public UpdateOrders(){
         
         // database URL
         final String DATABASE_URL = "jdbc:mysql://localhost/purchases";

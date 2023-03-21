@@ -2,6 +2,8 @@ package Product;
 
 import java.sql.*;
 
+import javax.swing.JOptionPane;
+
 public class InsertItem{
 
     public InsertItem(String itemName, double itemPrice, int itemStock){
@@ -10,7 +12,6 @@ public class InsertItem{
         final String DATABASE_URL = "jdbc:mysql://localhost/purchases";
         Connection connection = null ;
         PreparedStatement pstat = null;
-        int i=0;
      
         try {
             // establish connection to database
@@ -21,8 +22,9 @@ public class InsertItem{
             pstat.setDouble(2, itemPrice);
             pstat.setInt(3, itemStock);
             // insert data into table
-            i = pstat.executeUpdate();
-            System.out.println( i + " record successfully added to the table. ");
+            pstat.executeUpdate();
+            // If the insert was successful, display a success message to the user
+            JOptionPane.showMessageDialog(null, "Item added successfully!");
         }
         catch(SQLException sqlException){
             sqlException.printStackTrace();

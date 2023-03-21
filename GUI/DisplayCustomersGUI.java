@@ -207,18 +207,18 @@ public class DisplayCustomersGUI extends JPanel{
                         GUIHandler.handler.revalidate(); // tell the container to re-layout its components
                         GUIHandler.handler.repaint(); // tell the container to repaint itself
                     }
-                } catch (SQLException sqlException) {
+                } catch (SQLException sqlException){
                     sqlException.printStackTrace();
                 }
                 finally{
                     try{
-                        if (resultSet != null) {
+                        if(resultSet != null) {
                             resultSet.close();
                         }
-                        if (pstat != null) {
+                        if(pstat != null) {
                             pstat.close();
                         }
-                        if (connection != null) {
+                        if(connection != null) {
                             connection.close();
                         }
                     }

@@ -1,12 +1,10 @@
 package Orders;
 
 import java.sql.*;
-
 import Users.UserSession;
 
 class InsertOrders{
-
-    public static void main(String[] args) {
+    public static void main(String[] args){
         
         // database URL
         final String DATABASE_URL = "jdbc:mysql://localhost/purchases";
@@ -83,7 +81,7 @@ class InsertOrders{
             pstat.executeUpdate();
         }
         catch(SQLException sqlException){
-            sqlException . printStackTrace () ;
+            sqlException.printStackTrace();
         }
         finally {
             try {
@@ -91,7 +89,7 @@ class InsertOrders{
                 connection.close();
             }
             catch (Exception exception){
-                exception . printStackTrace () ;
+                exception.printStackTrace();
             }
         }
     } // end main

@@ -1,6 +1,9 @@
 package GUI;
 
 import javax.swing.*;
+
+import Product.DeleteItem;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
@@ -10,8 +13,8 @@ public class DisplayItemGUI extends JPanel{
     
     private String idData;
     private String itemNameData;
-    private String itemPriceData;
-    private String itemStockData;
+    private double itemPriceData;
+    private int itemStockData;
     private JLabel id;
     private JLabel itemName;
     private JLabel itemPrice;
@@ -48,7 +51,7 @@ public class DisplayItemGUI extends JPanel{
 
         back.addActionListener(new ActionListener(){ 
             public void actionPerformed(ActionEvent e) {
-                new MenuGUI();
+                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new MenuGUI());
             }
         });
 
@@ -118,10 +121,8 @@ public class DisplayItemGUI extends JPanel{
                         if(resultSet2.next()) {
                             idData = resultSet2.getString("item_id");
                             itemNameData = resultSet2.getString("item_name");
-                            itemPriceData = resultSet2.getString("item_price");
-                            itemStockData = resultSet2.getString("item_stock");
-                            System.out.println(selectedItem);
-                            System.out.println(itemStockData);
+                            itemPriceData = resultSet2.getDouble("item_price");
+                            itemStockData = resultSet2.getInt("item_stock");
                         }
                         id = new JLabel(idData);
                         c.gridy++;
@@ -131,13 +132,13 @@ public class DisplayItemGUI extends JPanel{
                             c.gridy++;
                             add(itemName, c);
                         }
-                        if(itemPriceData != null){
-                            itemPrice = new JLabel(itemPriceData);
+                        if(itemPriceData != 0){
+                            itemPrice = new JLabel(String.valueOf(itemPriceData));
                             c.gridy++;
                             add(itemPrice, c);
                         }
-                        if(itemStockData != null){
-                            itemStock = new JLabel(itemStockData);
+                        if(itemStockData != 0){
+                            itemStock = new JLabel(String.valueOf(itemStockData));
                             c.gridy++;
                             add(itemStock, c);
                         }
@@ -149,7 +150,7 @@ public class DisplayItemGUI extends JPanel{
 
                         editItem.addActionListener(new ActionListener(){   // Takes users to edit item screen
                             public void actionPerformed(ActionEvent e) {
-                                
+                                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new UpdateItemGUI(Integer.parseInt(idData), itemNameData, itemPriceData, itemStockData));
                             }
                         });
 
@@ -157,12 +158,12 @@ public class DisplayItemGUI extends JPanel{
                         c.gridy++;
                         add(deleteItem, c);
 
-                        /*deleteItem.addActionListener(new ActionListener(){   // Deletes selected item
+                        deleteItem.addActionListener(new ActionListener(){   // Deletes selected item
                             public void actionPerformed(ActionEvent e) {
                                 new DeleteItem(Integer.parseInt(idData));
-                                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new DisplayCustomersGUI());
+                                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new DisplayItemGUI());
                             }
-                        });*/
+                        });
 
                         GUIHandler.handler.revalidate(); // tell the container to re-layout its components
                         GUIHandler.handler.repaint(); // tell the container to repaint itself

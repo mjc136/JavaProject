@@ -8,73 +8,93 @@ import Product.*;
 
 public class InsertItemGUI extends JPanel{
 
+    private JButton back;
+    private JTextField itemName;
+    private JLabel itemNameLabel;
+    private JTextField itemPrice;
+    private JLabel itemPriceLabel;
+    private JTextField itemStock;
+    private JLabel itemStockLabel;
+    private JButton add;
+    private String itemNameData;
+    private double itemPriceData;
+    private int itemStockData;
+    private JButton clear;
+    
+
     public InsertItemGUI(){
 
-        JFrame frame = new JFrame();
-        JPanel panel = new JPanel();
         GridBagConstraints c = new GridBagConstraints();  
-        panel.setBorder(BorderFactory.createEmptyBorder(30,30,30,30)); // set grid size
-        panel.setLayout(new GridBagLayout()); 
+        setBorder(BorderFactory.createEmptyBorder(30,30,30,30)); // set grid size
+        setLayout(new GridBagLayout()); 
         c.insets = new Insets(5, 5, 5, 5); // set margin
-        panel.setBackground(Color.cyan);
+        setBackground(Color.cyan);
+
+                // back button
+
+                back = new JButton("Back");
+                c.gridx = 0;
+                c.gridy = 0;
+                add(back, c);
+        
+                back.addActionListener(new ActionListener(){ 
+                    public void actionPerformed(ActionEvent e) {
+                        GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new DisplayCustomersGUI());
+                    }
+                });
         
         //item name
+        itemName = new JTextField(5);
+        c.gridx++;
+        c.gridy++;
+        add(itemName, c);
 
-        JTextField itemName = new JTextField(5);
-        c.gridx = 1;
-        c.gridy = 0;
-        panel.add(itemName, c);
-
-        JLabel itemNameLabel = new JLabel("Item name");
-        c.gridx = 0;
-        c.gridy = 0;
-        panel.add(itemNameLabel, c);
+        itemNameLabel = new JLabel("Item name");
+        c.gridx--;
+        add(itemNameLabel, c);
 
         //item price
 
-        JTextField itemPrice = new JTextField(5);
-        c.gridx = 1;
-        c.gridy = 1; 
-        panel.add(itemPrice, c);
+        itemPrice = new JTextField(5);
+        c.gridy++;
+        c.gridx++;
+        add(itemPrice, c);
 
-        JLabel itemPriceLabel = new JLabel("Item price");
-        c.gridx = 0;
-        c.gridy = 1;
-        panel.add(itemPriceLabel, c);
+        itemPriceLabel = new JLabel("Item price");
+        c.gridx--;
+        add(itemPriceLabel, c);
 
         //item stock
 
-        JTextField itemStock = new JTextField(5);
-        c.gridx = 1;
-        c.gridy = 2;
-        panel.add(itemStock, c);
+        itemStock = new JTextField(5);
+        c.gridx++;
+        c.gridy++;
+        add(itemStock, c);
 
-        JLabel itemStockLabel = new JLabel("Item stock");
-        c.gridx = 0;
-        c.gridy = 2;
-        panel.add(itemStockLabel, c);
+        itemStockLabel = new JLabel("Item stock");
+        c.gridx--;
+        add(itemStockLabel, c);
 
         //buttons
 
-        JButton add = new JButton("add");
+        add = new JButton("add");
         c.gridx = 0;
-        c.gridy = 3;
-        panel.add(add, c);
+        c.gridy++;
+        add(add, c);
 
         add.addActionListener(new ActionListener(){ // convert date to string and send to sql file
-            public void actionPerformed(ActionEvent e) {
-                String itemNameData = itemName.getText();
-                double itemPriceData = Double.parseDouble(itemPrice.getText());
-                int itemStockData = Integer.parseInt(itemStock.getText());
+            public void actionPerformed(ActionEvent e){
+                itemNameData = itemName.getText();
+                itemPriceData = Double.parseDouble(itemPrice.getText());
+                itemStockData = Integer.parseInt(itemStock.getText());
 
                 new InsertItem(itemNameData, itemPriceData, itemStockData);
             }
         });
 
-        JButton clear = new JButton("clear");
-        c.gridx = 1;
-        c.gridy = 3;
-        panel.add(clear, c);
+        clear = new JButton("clear");
+        c.gridx++;
+        add(clear, c);
 
         clear.addActionListener(new ActionListener(){   // when clear is pressed everything is set to null
             public void actionPerformed(ActionEvent e) {
@@ -83,16 +103,6 @@ public class InsertItemGUI extends JPanel{
                 itemStock.setText(null);
             }
         });
-
-
-        // setting frame
-
-        frame.setSize(500, 500);
-        frame.add(panel, BorderLayout.CENTER);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("Item Details");
-        frame.pack();
-        frame.setVisible(true);
 
     }
     

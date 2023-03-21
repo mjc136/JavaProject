@@ -21,6 +21,8 @@ public class DeleteCustomer {
             pstat . setInt (1, CustomerID);
             // delete data from the table
             pstat.executeUpdate();
+            System.out.println();
+            JOptionPane.showMessageDialog(null, "Customer Deleted!");
         }
         catch(SQLException sqlException ) {
             sqlException.printStackTrace();
@@ -28,14 +30,13 @@ public class DeleteCustomer {
         }
         finally {
             try{
-                pstat.close () ;
-                connection.close () ;
+                pstat.close();
+                connection.close();
             }
             catch( Exception exception ){
                 exception.printStackTrace () ;
             }
         }
-        JOptionPane.showMessageDialog(null, "Customer Deleted!");
     }
 } // end class
             
