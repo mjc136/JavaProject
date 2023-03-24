@@ -25,6 +25,8 @@ class InsertCustomerGUI extends JPanel{
     private JLabel phoneNumberLabel;
     private Date dob;
     private JLabel dobLabel;
+    private JTextField password;
+    private JLabel passwordLabel;
     private JButton add;
     private String firstNameData;
     private String lastNameData;
@@ -32,6 +34,7 @@ class InsertCustomerGUI extends JPanel{
     private String emailData;
     private String phoneNumberData;
     private Date dobData;
+    private String passwordData;
 
     public InsertCustomerGUI(){
         
@@ -50,7 +53,7 @@ class InsertCustomerGUI extends JPanel{
 
         back.addActionListener(new ActionListener(){ 
             public void actionPerformed(ActionEvent e) {
-                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new DisplayCustomersGUI());
+                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new LoginGUI());
             }
         });
         
@@ -124,6 +127,16 @@ class InsertCustomerGUI extends JPanel{
         c.gridx--;
         add(dobLabel, c);
 
+        //password
+
+        password = new JTextField(10);
+        c.gridx = 4;
+        add(password, c);
+
+        passwordLabel = new JLabel("Password");
+        c.gridx--;
+        add(passwordLabel, c);
+
         // buttons
 
         add = new JButton("add");
@@ -139,9 +152,11 @@ class InsertCustomerGUI extends JPanel{
                 emailData = email.getText();
                 phoneNumberData = phoneNumber.getText();
                 dobData = new java.sql.Date(dobModel.getDate().getTime());
+                passwordData = password.getText();
                 
 
-                new InsertCustomer(firstNameData, lastNameData, addressData, emailData, phoneNumberData, dobData);
+                new InsertCustomer(firstNameData, lastNameData, addressData, emailData, phoneNumberData, dobData, passwordData);
+                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new LoginGUI());
             }
         });
         
@@ -157,6 +172,7 @@ class InsertCustomerGUI extends JPanel{
                 address.setText(null);
                 email.setText(null);
                 phoneNumber.setText(null);
+                password.setText(null);
             }
         });
 

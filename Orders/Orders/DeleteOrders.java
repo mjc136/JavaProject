@@ -4,14 +4,12 @@ import java.sql.*;
 
 public class DeleteOrders{
     
-    public static void main(String[] args) {
+    public DeleteOrders(int orderID){
         
         // database URL
         final String DATABASE_URL = "jdbc:mysql://localhost/purchases";
         Connection connection = null;
         PreparedStatement pstat = null;
-        int i=0;
-        int orderID=3;
         try{
             // establish connection to database
             connection = DriverManager.getConnection(
@@ -20,8 +18,7 @@ public class DeleteOrders{
             pstat = connection.prepareStatement("Delete From orders Where order_id=?");
             pstat . setInt (1, orderID);
             // delete data from the table
-            i = pstat.executeUpdate();
-            System.out. println ( i + " record successfully removed from the table .");
+            pstat.executeUpdate();
         }
         catch(SQLException sqlException ) {
             sqlException . printStackTrace () ;

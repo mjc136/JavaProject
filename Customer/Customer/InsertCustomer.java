@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 public class InsertCustomer{
 
     
-    public InsertCustomer(String firstName, String lastName, String address, String email, String phoneNum, Date dob){
+    public InsertCustomer(String firstName, String lastName, String address, String email, String phoneNum, Date dob, String password){
         
         // database URL
         final String DATABASE_URL = "jdbc:mysql://localhost/purchases";
@@ -17,13 +17,14 @@ public class InsertCustomer{
             // establish connection to database
             connection = DriverManager.getConnection(DATABASE_URL, "root", "Sydpuppy2016");
             // create Prepared Statement for inserting data into table
-            pstat = connection.prepareStatement("INSERT INTO Customers (first_name, last_name, address, email, phone_number, date_of_birth) VALUES (?,?,?,?,?,?)");
+            pstat = connection.prepareStatement("INSERT INTO Customers (first_name, last_name, address, email, phone_number, date_of_birth, password) VALUES (?,?,?,?,?,?,?)");
             pstat.setString(1, firstName );
             pstat.setString(2, lastName);
             pstat.setString(3, address);
             pstat.setString(4, email);
             pstat.setString(5, phoneNum);
             pstat.setDate(6, dob);
+            pstat.setString(7, password);
 
             // insert data into table
             pstat.executeUpdate();

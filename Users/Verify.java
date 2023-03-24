@@ -20,7 +20,7 @@ public class Verify {
             // establish connection to database
             connection = DriverManager.getConnection(DATABASE_URL, "root", "Sydpuppy2016");
             // create Prepared Statement for querying data in the table
-            pstat = connection.prepareStatement("SELECT password FROM Users WHERE user_id = ?");
+            pstat = connection.prepareStatement("SELECT password FROM customers WHERE customer_id = ?");
             pstat.setInt(1, id);
             // query data in the table
             resultSet = pstat.executeQuery();
@@ -47,9 +47,9 @@ public class Verify {
         }
         finally{
             try{
-                resultSet . close () ;
-                pstat . close () ;
-                connection. close () ;
+                resultSet.close();
+                pstat.close();
+                connection.close();
             }
                 catch (Exception exception){
                 exception.printStackTrace();

@@ -24,27 +24,25 @@ public class LoginGUI extends JPanel{
         add(userId, c);
 
         JLabel userIdLabel = new JLabel("User ID");
-        c.gridx = 0;
-        c.gridy = 0;
+        c.gridx--;
         add(userIdLabel, c);
 
         //password
 
         JTextField password = new JTextField(5);
-        c.gridx = 1;
-        c.gridy = 1; 
+        c.gridx++;
+        c.gridy++; 
         add(password, c);
 
         JLabel passwordLabel = new JLabel("Password");
-        c.gridx = 0;
-        c.gridy = 1;
+        c.gridx--;
         add(passwordLabel, c);
 
         //buttons
 
         JButton login = new JButton("Login");
-        c.gridx = 0;
-        c.gridy = 3;
+        c.gridx--;
+        c.gridy++;
         add(login, c);
 
         login.addActionListener(new ActionListener(){
@@ -59,15 +57,25 @@ public class LoginGUI extends JPanel{
             }
         });
 
+        
         JButton clear = new JButton("clear");
-        c.gridx = 1;
-        c.gridy = 3;
+        c.gridx+=2;
         add(clear, c);
-
+        
         clear.addActionListener(new ActionListener(){   // when clear is pressed everything is set to null
             public void actionPerformed(ActionEvent e) {
                 userId.setText(null);
                 password.setText(null);
+            }
+        });
+        
+        JButton addCustomer = new JButton("Register");
+        c.gridy++;
+        add(addCustomer, c);
+        
+        addCustomer.addActionListener(new ActionListener(){ // Takes users to add customer screen
+            public void actionPerformed(ActionEvent e) {
+                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new InsertCustomerGUI());
             }
         });
         

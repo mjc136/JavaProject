@@ -43,7 +43,7 @@ public class MenuGUI extends JPanel{
 
         orders.addActionListener(new ActionListener(){   // Takes users to orders menu
             public void actionPerformed(ActionEvent e) {
-                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new MenuGUI());
+                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new DisplayOrdersGUI());
             }
         });
 

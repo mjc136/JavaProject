@@ -114,22 +114,11 @@ public class DisplayCustomersGUI extends JPanel{
 
         // buttons
 
-        JButton addCustomer = new JButton("Add");
-        add(addCustomer, c);
-        
-        addCustomer.addActionListener(new ActionListener(){ // Takes users to add customer screen
-            public void actionPerformed(ActionEvent e) {
-                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new InsertCustomerGUI());
-            }
-        });
-        
-        c.gridy++;
         add(customerList, c);
 
         customerList.addActionListener(new ActionListener(){   
             public void actionPerformed(ActionEvent e) {
                 try{
-                    remove(addCustomer);
                     remove(customerList);
 
                     String selectedCustomer = (String) customerList.getSelectedItem();
@@ -149,7 +138,7 @@ public class DisplayCustomersGUI extends JPanel{
                             dobData = resultSet2.getDate("date_of_birth");
                         }
                         id = new JLabel(idData);
-                        c.gridy++;
+                        c.gridy = 2;
                         add(id, c);
                         if(firstnameData != null){  // if null skip 
                             firstname = new JLabel(firstnameData);

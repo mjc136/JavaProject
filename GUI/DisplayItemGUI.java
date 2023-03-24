@@ -25,14 +25,15 @@ public class DisplayItemGUI extends JPanel{
     private JLabel itemStockLabel;
     private JButton editItem;
     private JButton deleteItem;
+    private JButton addItem;
+    private JButton back;
     
     private JComboBox<String> itemList = new JComboBox<>();
     private final String DATABASE_URL = "jdbc:mysql://localhost/purchases";
     private Connection connection = null;
     private PreparedStatement pstat= null;
-    private ResultSet resultSet = null;
+    private ResultSet resultSet = null;    
 
-    private JButton back;
      
     public DisplayItemGUI(){
          
@@ -95,7 +96,7 @@ public class DisplayItemGUI extends JPanel{
 
         // buttons
 
-        JButton addItem = new JButton("Add");
+        addItem = new JButton("Add");
         add(addItem, c);
         
         addItem.addActionListener(new ActionListener(){ // Takes users to add item screen screen
