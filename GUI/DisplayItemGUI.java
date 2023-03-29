@@ -56,7 +56,7 @@ public class DisplayItemGUI extends JPanel{
             }
         });
 
-        idLabel = new JLabel("ID");
+        idLabel = new JLabel("Item ID");
         c.gridy+=2;
         add(idLabel,c);
         
@@ -111,12 +111,20 @@ public class DisplayItemGUI extends JPanel{
         itemList.addActionListener(new ActionListener(){   
             public void actionPerformed(ActionEvent e){
                 try{
-                    remove(addItem);
-                    remove(itemList);
-
+                    connection = DriverManager.getConnection(DATABASE_URL, "root", "Sydpuppy2016");
+                    if(id != null){ // refreshes display when new item is chosen
+                        remove(id);
+                        remove(itemName);
+                        remove(itemPrice);
+                        remove(itemStock);
+                        remove(editItem);
+                        remove(deleteItem);
+                        c.gridx = 2;
+                        c.gridy = 1;
+                    }
                     String selectedItem = (String) itemList.getSelectedItem();
                     if(selectedItem != null){
-                        pstat = connection.prepareStatement("SELECT * FROM Products WHERE item_name = ?");
+                        PreparedStatement pstat = connection.prepareStatement("SELECT * FROM Products WHERE item_name = ?");
                         pstat.setString(1, selectedItem);
                         ResultSet resultSet2 = pstat.executeQuery();
                         if(resultSet2.next()) {
@@ -133,12 +141,12 @@ public class DisplayItemGUI extends JPanel{
                             c.gridy++;
                             add(itemName, c);
                         }
-                        if(itemPriceData != 0){
+                        if(itemPriceData != 0){ // if null skip 
                             itemPrice = new JLabel(String.valueOf(itemPriceData));
                             c.gridy++;
                             add(itemPrice, c);
                         }
-                        if(itemStockData != 0){
+                        if(itemStockData != 0){ // if null skip 
                             itemStock = new JLabel(String.valueOf(itemStockData));
                             c.gridy++;
                             add(itemStock, c);

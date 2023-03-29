@@ -61,15 +61,15 @@ public class DisplayCustomersGUI extends JPanel{
             }
         });
 
-        idLabel = new JLabel("ID");
+        idLabel = new JLabel("Customer ID");
         c.gridy+=2;
         add(idLabel,c);
         
-        firstnameLabel = new JLabel("First name");
+        firstnameLabel = new JLabel("First Name");
         c.gridy++;
         add(firstnameLabel,c);
         
-        lastnameLabel = new JLabel("Last name");
+        lastnameLabel = new JLabel("Last Name");
         c.gridy++;
         add(lastnameLabel,c);
         

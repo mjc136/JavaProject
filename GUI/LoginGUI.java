@@ -29,7 +29,7 @@ public class LoginGUI extends JPanel{
 
         //password
 
-        JTextField password = new JTextField(5);
+        JPasswordField password = new JPasswordField(5);
         c.gridx++;
         c.gridy++; 
         add(password, c);
@@ -48,7 +48,7 @@ public class LoginGUI extends JPanel{
         login.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
                 int userIdData = Integer.parseInt(userId.getText());
-                String passwordData = password.getText();
+                String passwordData = String.valueOf(password.getPassword());
                 Verify v = new Verify(userIdData, passwordData);
                 if(v.verifier(userIdData, passwordData)){
                     UserSession.setUser(userIdData);

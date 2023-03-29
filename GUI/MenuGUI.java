@@ -2,6 +2,9 @@ package GUI;
 
 
 import javax.swing.*;
+
+import Users.UserSession;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -18,7 +21,7 @@ public class MenuGUI extends JPanel{
         //buttons
 
         JButton customer = new JButton("Profile");
-        c.gridx = 0;
+        c.gridx=0;
         add(customer, c);
 
         customer.addActionListener(new ActionListener(){ // Takes users to customer menu
@@ -44,6 +47,17 @@ public class MenuGUI extends JPanel{
         orders.addActionListener(new ActionListener(){   // Takes users to orders menu
             public void actionPerformed(ActionEvent e) {
                 GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new DisplayOrdersGUI());
+            }
+        });
+
+        JButton logout = new JButton("Log out");
+        c.gridx++;
+        add(logout, c);
+
+        logout.addActionListener(new ActionListener(){ // Takes users to customer menu
+            public void actionPerformed(ActionEvent e) {
+                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new LoginGUI());
+                UserSession.setUser(0);
             }
         });
 

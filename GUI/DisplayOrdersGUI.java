@@ -65,7 +65,7 @@ public class DisplayOrdersGUI extends JPanel{
             }
         });
 
-        idLabel = new JLabel("ID");
+        idLabel = new JLabel("Reference Number");
         c.gridy+=2;
         add(idLabel,c);
 
@@ -114,6 +114,19 @@ public class DisplayOrdersGUI extends JPanel{
         catch(SQLException sqlException){
             sqlException.printStackTrace();
         }
+        finally{
+            try{
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (pstat != null) {
+                    pstat.close();
+                }
+            }
+            catch (Exception exception){
+                exception.printStackTrace();
+            }
+        }
         
         c.gridwidth = 5;
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -137,8 +150,20 @@ public class DisplayOrdersGUI extends JPanel{
         itemList.addActionListener(new ActionListener(){   
             public void actionPerformed(ActionEvent e){
                 try{
-                    remove(addOrder);
-                    remove(itemList);
+                    connection = DriverManager.getConnection(DATABASE_URL, "root", "Sydpuppy2016");
+                    if(id != null){ // refreshes display when new item is chosen
+                        remove(id);
+                        remove(firstname);
+                        remove(lastname);
+                        remove(address);
+                        remove(itemName);
+                        remove(orderQuantity);
+                        remove(totalPrice);
+                        remove(date);
+                        remove(deleteOrder);
+                        c.gridx = 2;
+                        c.gridy = 1;
+                    }
 
                     String selectedOrder = (String) itemList.getSelectedItem();
                     if(selectedOrder != null){
@@ -146,16 +171,16 @@ public class DisplayOrdersGUI extends JPanel{
                         int space = selectedOrder.indexOf(" ");
                         pstat.setString(1, selectedOrder.substring(0, space));
                         pstat.setString(2, selectedOrder.substring(space+1, selectedOrder.length()));
-                        ResultSet resultSet2 = pstat.executeQuery();
-                        if(resultSet2.next()) {
-                            idData = resultSet2.getString("order_id");
-                            firstnameData = resultSet2.getString("first_name");
-                            lastnameData = resultSet2.getString("last_name");
-                            addressData = resultSet2.getString("address");
-                            itemNameData = resultSet2.getString("item_name");
-                            orderQuantityData = resultSet2.getInt("order_quantity");
-                            totalPriceData = resultSet2.getDouble("total_price");
-                            dateData = resultSet2.getDate("date_of_purchase");
+                        ResultSet resultSet = pstat.executeQuery();
+                        if(resultSet.next()) {
+                            idData = resultSet.getString("order_id");
+                            firstnameData = resultSet.getString("first_name");
+                            lastnameData = resultSet.getString("last_name");
+                            addressData = resultSet.getString("address");
+                            itemNameData = resultSet.getString("item_name");
+                            orderQuantityData = resultSet.getInt("order_quantity");
+                            totalPriceData = resultSet.getDouble("total_price");
+                            dateData = resultSet.getDate("date_of_purchase");
                         }
                         id = new JLabel(idData);
                         c.gridy++;

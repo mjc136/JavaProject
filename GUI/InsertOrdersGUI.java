@@ -84,6 +84,7 @@ public class InsertOrdersGUI extends JPanel{
         itemList.addActionListener(new ActionListener(){   
             public void actionPerformed(ActionEvent e){
                 try{
+                    connection = DriverManager.getConnection(DATABASE_URL, "root", "Sydpuppy2016");
                     String selectedItem = (String) itemList.getSelectedItem();
                     if(selectedItem != null){
                         pstat = connection.prepareStatement("SELECT item_name FROM Products WHERE item_name = ?");

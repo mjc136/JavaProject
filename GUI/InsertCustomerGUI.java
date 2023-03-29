@@ -25,8 +25,10 @@ class InsertCustomerGUI extends JPanel{
     private JLabel phoneNumberLabel;
     private Date dob;
     private JLabel dobLabel;
-    private JTextField password;
+    private JPasswordField password;
     private JLabel passwordLabel;
+    private JPasswordField conPassword;
+    private JLabel conPasswordLabel;
     private JButton add;
     private String firstNameData;
     private String lastNameData;
@@ -35,6 +37,7 @@ class InsertCustomerGUI extends JPanel{
     private String phoneNumberData;
     private Date dobData;
     private String passwordData;
+    private String conPasswordData;
 
     public InsertCustomerGUI(){
         
@@ -64,7 +67,7 @@ class InsertCustomerGUI extends JPanel{
         c.gridy = 1;
         add(firstName, c);
         
-        firstNameLabel = new JLabel("Firstname");
+        firstNameLabel = new JLabel("First Name");
         c.gridx--;
         add(firstNameLabel, c);
         
@@ -74,7 +77,7 @@ class InsertCustomerGUI extends JPanel{
         c.gridx = 4;
         add(lastName, c);
 
-        lastNameLabel = new JLabel("Lastname");
+        lastNameLabel = new JLabel("Last Name");
         c.gridx--;
         add(lastNameLabel, c);
 
@@ -104,6 +107,7 @@ class InsertCustomerGUI extends JPanel{
         
         phoneNumber = new JTextField(10);
         c.gridx = 4;
+        c.gridy--;
         add(phoneNumber, c);
 
         phoneNumberLabel = new JLabel("Phone Number");
@@ -120,7 +124,7 @@ class InsertCustomerGUI extends JPanel{
         dateSpinner.setEditor(dateEditor);
 
         c.gridx = 2;
-        c.gridy++;;
+        c.gridy+=2;
         add(dateSpinner, c);
         
         dobLabel = new JLabel("Date of Birth");
@@ -129,19 +133,29 @@ class InsertCustomerGUI extends JPanel{
 
         //password
 
-        password = new JTextField(10);
+        password = new JPasswordField(10);
         c.gridx = 4;
+        c.gridy--;
         add(password, c);
 
         passwordLabel = new JLabel("Password");
         c.gridx--;
         add(passwordLabel, c);
 
+        conPassword = new JPasswordField(10);
+        c.gridx = 4;
+        c.gridy++;
+        add(conPassword, c);
+
+        conPasswordLabel = new JLabel("Confirm Password");
+        c.gridx--;
+        add(conPasswordLabel, c);
+
         // buttons
 
         add = new JButton("add");
         c.gridx = 2;
-        c.gridy++;
+        c.gridy+=2;
         add(add, c);
 
         add.addActionListener(new ActionListener(){ 
@@ -152,11 +166,16 @@ class InsertCustomerGUI extends JPanel{
                 emailData = email.getText();
                 phoneNumberData = phoneNumber.getText();
                 dobData = new java.sql.Date(dobModel.getDate().getTime());
-                passwordData = password.getText();
+                passwordData = String.valueOf(password.getPassword());
+                conPasswordData = String.valueOf(conPassword.getPassword());
                 
-
-                new InsertCustomer(firstNameData, lastNameData, addressData, emailData, phoneNumberData, dobData, passwordData);
-                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new LoginGUI());
+                if(passwordData.equals(conPasswordData)){
+                    new InsertCustomer(firstNameData, lastNameData, addressData, emailData, phoneNumberData, dobData, passwordData);
+                    GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new LoginGUI());
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Password does not match confirm password");
+                }
             }
         });
         
