@@ -3,6 +3,7 @@ package GUI;
 import javax.swing.*;
 
 import Orders.DeleteOrders;
+import Users.UserSession;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -100,8 +101,20 @@ public class DisplayOrdersGUI extends JPanel{
         try{
             // establish connection to database
             connection = DriverManager.getConnection(DATABASE_URL, "root", "Sydpuppy2016");
+
+            pstat = connection.prepareStatement("SELECT first_name, last_name FROM customers WHERE customer_id=?");
+            pstat.setInt(1, UserSession.getUser());
+            // query data in the table
+            resultSet = pstat.executeQuery();
+            while (resultSet.next()) {
+                firstnameData = resultSet.getString("first_name");
+                lastnameData = resultSet.getString("last_name");
+            }
+
             // create Prepared Statement for querying data in the table
-            pstat = connection.prepareStatement("SELECT * FROM orders");
+            pstat = connection.prepareStatement("SELECT * FROM orders WHERE first_name=? and last_name=?");
+            pstat.setString(1, firstnameData);
+            pstat.setString(2, lastnameData);
             // query data in the table
             resultSet = pstat.executeQuery();
             // process query results
