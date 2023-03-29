@@ -20,16 +20,16 @@ public class DeleteOrders{
             // delete data from the table
             pstat.executeUpdate();
         }
-        catch(SQLException sqlException ) {
-            sqlException . printStackTrace () ;
+        catch(SQLException sqlException){
+            sqlException.printStackTrace();
         }
         finally {
             try{
-                pstat . close () ;
-                connection. close () ;
+                pstat.close();
+                connection.close();
             }
-            catch ( Exception exception ){
-                exception . printStackTrace () ;
+            catch (Exception exception){
+                exception.printStackTrace();
             }
         }
     } // end main

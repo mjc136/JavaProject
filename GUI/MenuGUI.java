@@ -17,7 +17,7 @@ public class MenuGUI extends JPanel{
 
         //buttons
 
-        JButton customer = new JButton("Customer");
+        JButton customer = new JButton("Profile");
         c.gridx = 0;
         add(customer, c);
 

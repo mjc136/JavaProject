@@ -116,7 +116,7 @@ public class DisplayItemGUI extends JPanel{
 
                     String selectedItem = (String) itemList.getSelectedItem();
                     if(selectedItem != null){
-                        PreparedStatement pstat = connection.prepareStatement("SELECT * FROM Products WHERE item_name = ?");
+                        pstat = connection.prepareStatement("SELECT * FROM Products WHERE item_name = ?");
                         pstat.setString(1, selectedItem);
                         ResultSet resultSet2 = pstat.executeQuery();
                         if(resultSet2.next()) {

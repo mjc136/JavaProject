@@ -56,7 +56,8 @@ class UpdateItemGUI extends JPanel{
         
         itemPriceField = new JTextField(10);
         itemPriceField.setText(itemPrice.toString());
-        c.gridx = 4;
+        c.gridy++;
+        c.gridx++;
         add(itemPriceField, c);
 
         itemPriceLabel = new JLabel("Item price");
@@ -65,9 +66,9 @@ class UpdateItemGUI extends JPanel{
 
         // item stock
 
-        itemStockField = new JTextField(20);
+        itemStockField = new JTextField(10);
         itemStockField.setText(String.valueOf(itemStock));
-        c.gridx = 2;
+        c.gridx++;
         c.gridy++;
         add(itemStockField, c);
 
@@ -78,7 +79,7 @@ class UpdateItemGUI extends JPanel{
         // buttons
         
         JButton add = new JButton("Confirm");
-        c.gridx = 2;
+        c.gridx++;
         c.gridy++;
         add(add, c);
         

@@ -34,7 +34,6 @@ public class DisplayOrdersGUI extends JPanel{
     private JLabel orderQuantityLabel;
     private JLabel totalPriceLabel;
     private JLabel dateLabel;
-    private JButton editOrder;
     private JButton deleteOrder;
     private JButton addOrder;
     private JButton back;
@@ -149,7 +148,7 @@ public class DisplayOrdersGUI extends JPanel{
                         pstat.setString(2, selectedOrder.substring(space+1, selectedOrder.length()));
                         ResultSet resultSet2 = pstat.executeQuery();
                         if(resultSet2.next()) {
-                            idData = resultSet2.getString("item_id");
+                            idData = resultSet2.getString("order_id");
                             firstnameData = resultSet2.getString("first_name");
                             lastnameData = resultSet2.getString("last_name");
                             addressData = resultSet2.getString("address");
@@ -198,25 +197,14 @@ public class DisplayOrdersGUI extends JPanel{
                         }
                         c.gridy++;
 
-                        editOrder = new JButton("Edit");
-                        c.gridy++;
-                        c.gridx++;
-                        add(editOrder, c);
-
-                        editOrder.addActionListener(new ActionListener(){   // Takes users to edit item screen
-                            public void actionPerformed(ActionEvent e) {
-                                //GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new UpdateOrderGUI(Integer.parseInt(idData), itemNameData, itemPriceData, itemStockData));
-                            }
-                        });
-
-                        deleteOrder = new JButton("Delete");
+                        deleteOrder = new JButton("Cancel Order");
                         c.gridy++;
                         add(deleteOrder, c);
 
                         deleteOrder.addActionListener(new ActionListener(){   // Deletes selected item
                             public void actionPerformed(ActionEvent e) {
                                 new DeleteOrders(Integer.parseInt(idData));
-                                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new DisplayItemGUI());
+                                GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new DisplayOrdersGUI());
                             }
                         });
 
