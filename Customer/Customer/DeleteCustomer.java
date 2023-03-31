@@ -22,7 +22,7 @@ public class DeleteCustomer {
             // delete data from the table
             pstat.executeUpdate();
             System.out.println();
-            JOptionPane.showMessageDialog(null, "Customer Deleted!");
+            JOptionPane.showMessageDialog(null, "Your profile has been deleted!");
         }
         catch(SQLException sqlException ) {
             sqlException.printStackTrace();

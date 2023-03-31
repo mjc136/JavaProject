@@ -12,7 +12,7 @@ import java.sql.*;
 public class DisplayOrdersGUI extends JPanel{
 
     private String idData;
-    private String firstnameData;
+    private String firstnameData = "";
     private String lastnameData;
     private String addressData;
     private String itemNameData;

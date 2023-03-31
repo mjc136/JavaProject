@@ -163,7 +163,8 @@ public class DisplayCustomersGUI extends JPanel{
             deleteCustomer.addActionListener(new ActionListener(){   // Deletes selected user
                 public void actionPerformed(ActionEvent e) {
                     new DeleteCustomer(Integer.parseInt(idData));
-                    GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new DisplayCustomersGUI());
+                    GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new LoginGUI());
+                    UserSession.setUser(0);
                 }
             });
 

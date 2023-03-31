@@ -39,7 +39,7 @@ public class InsertItemGUI extends JPanel{
         
                 back.addActionListener(new ActionListener(){ 
                     public void actionPerformed(ActionEvent e) {
-                        GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new DisplayCustomersGUI());
+                        GUIHandler.replacePanel(GUIHandler.handler, GUIHandler.panel, new DisplayItemGUI());
                     }
                 });
         

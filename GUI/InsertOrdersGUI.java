@@ -143,6 +143,7 @@ public class InsertOrdersGUI extends JPanel{
                 orderQuantityData = Integer.parseInt(orderQuantity.getText());
                 // get item id
                 try{
+                    connection = DriverManager.getConnection(DATABASE_URL, "root", "Sydpuppy2016");
                     String selectedItem = (String) itemList.getSelectedItem();
                     if(selectedItem != null){
                         pstat = connection.prepareStatement("SELECT item_id FROM Products WHERE item_name = ?");

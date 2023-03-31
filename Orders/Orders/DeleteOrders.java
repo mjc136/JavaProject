@@ -2,6 +2,8 @@ package Orders;
 
 import java.sql.*;
 
+import javax.swing.JOptionPane;
+
 public class DeleteOrders{
     
     public DeleteOrders(int orderID){
@@ -19,6 +21,7 @@ public class DeleteOrders{
             pstat . setInt (1, orderID);
             // delete data from the table
             pstat.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Order deleted", DATABASE_URL, JOptionPane.ERROR_MESSAGE);
         }
         catch(SQLException sqlException){
             sqlException.printStackTrace();

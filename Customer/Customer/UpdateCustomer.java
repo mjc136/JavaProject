@@ -25,7 +25,7 @@ public class UpdateCustomer {
             pstat.setInt(7, id);
             //Update data in the table
             pstat.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Customer updated successfully!");
+            JOptionPane.showMessageDialog(null, "Your profile has been updated");
         }
         catch(SQLException sqlException ) {
             sqlException.printStackTrace();
